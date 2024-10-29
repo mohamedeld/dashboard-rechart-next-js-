@@ -43,7 +43,7 @@ const VerticalIcon = () => {
         links?.map(item=>{
           const isActive = pathName === item?.path;
           return (
-            <li className={`w-[40px] h-[40px] rounded-full text-1xl transition-colors duration-300 flex justify-center items-center ${isActive ? 'bg-black text-white' : 'bg-white text-black'}`} key={item?.path}>{item?.icon}</li>
+            <li className={`cursor-pointer w-[40px] h-[40px] rounded-full text-1xl transition-colors duration-300 flex justify-center items-center ${isActive ? 'bg-black text-white' : 'bg-white text-black'}`} key={item?.path}>{item?.icon}</li>
           )
         })
       }
