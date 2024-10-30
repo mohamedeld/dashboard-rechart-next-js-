@@ -10,7 +10,7 @@ const RegisterPage = () => {
   const toggleLogin = ()=>{
     setIsLogin(prev=> !prev);
   }
-  console.log(isLogin)
+  
   return (
     <>
     

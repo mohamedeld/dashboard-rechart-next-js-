@@ -7,21 +7,23 @@ interface User {
   email: string;
   password: string;
 }
-interface IProps{
-  toggleLogin:()=>void;
+interface IProps {
+  toggleLogin: () => void;
 }
-const LoginForm = ({toggleLogin}:IProps) => {
-  const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm<User>({
+const LoginForm = ({ toggleLogin }: IProps) => {
+  const { handleSubmit,reset, register, formState: { errors, isSubmitting } } = useForm<User>({
     resolver: zodResolver(loginValidation),
     mode: 'onChange'
   });
   const onSubmit = (values: User) => {
     toggleLogin()
+    reset({
+      email:'',
+      password:''
+    })
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-6 gap-6">
-
-
       <div className="col-span-12">
         <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
 
@@ -29,19 +31,19 @@ const LoginForm = ({toggleLogin}:IProps) => {
           type="email"
           id="Email"
           {...register("email")}
-          className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+          className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm py-2 px-2"
         />
         {errors?.email && <span className="text-red-500">{errors?.email?.message}</span>}
       </div>
 
-      <div className="col-span-6 sm:col-span-3">
+      <div className="col-span-12">
         <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
 
         <input
           type="password"
           id="Password"
           {...register("password")}
-          className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+          className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm py-2 px-2"
         />
         {errors?.password && <span className="text-red-500">{errors?.password?.message}</span>}
       </div>
@@ -54,8 +56,8 @@ const LoginForm = ({toggleLogin}:IProps) => {
         </button>
 
         <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-          Do not have an account yet?
-          <a href="#" className="text-gray-700 underline">Log in</a>.
+          Do not have an account yet?{" "}
+          <span onClick={toggleLogin} className="text-gray-700 cursor-pointer hover:underline">Register</span>.
         </p>
       </div>
     </form>

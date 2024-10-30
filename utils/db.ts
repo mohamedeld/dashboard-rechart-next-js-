@@ -25,7 +25,6 @@ export async function connectDb() {
 
     await mongoose.disconnect();
   }
-
   // Connect to the database
   const db = await mongoose.connect(process.env.DB_URL as string);
   console.log("New connection to the database.");
