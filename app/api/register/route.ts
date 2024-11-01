@@ -34,7 +34,7 @@ export async function POST(req:NextRequest){
         email,
         password:hashedPassword
       });
-      const token = jwt.sign({userId:newUser?._id},process.env.JWT_SECRET as string,{
+      const token = jwt.sign({userId:newUser?._id},process.env.NEXTAUTH_SECRET as string,{
         expiresIn:process.env.JWT_EXPIRES_AT
       })  
       return NextResponse.json({
